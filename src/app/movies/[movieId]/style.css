@@ -1,0 +1,289 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: white;
+}
+
+.md-movie-detail-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.md-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.5) blur(5px);
+}
+
+.md-movie-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  gap: 40px;
+  z-index: 1;
+  padding-top: 2rem;
+}
+
+.md-left-section {
+  flex: 1;
+  margin-right: 20px;
+  margin-top: 100px;
+  max-width: 450px;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.md-left-section:hover {
+  transform: translateY(-5px);
+}
+
+.md-movie-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #ff5757;
+}
+
+.md-movie-info {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  font-weight: bold;
+}
+.md-movie-info span {
+  color: white;
+}
+
+.md-movie-overview {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #e0e0e0;
+}
+
+.md-buttons button {
+  background-color: #ff5757;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.md-buttons button:hover {
+  background-color: #ff2e2e;
+}
+
+.md-right-section {
+  flex: 1;
+  max-width: 600px;
+}
+
+.md-related-movies-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.md-related-movies-section h3 {
+  color: white;
+}
+
+.md-related-movies-slider {
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.md-related-movies-wrapper {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.md-related-movie-card {
+  width: 130px;
+  margin: 0 10px;
+  height: 250px;
+  text-align: center;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.md-related-movie-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.md-related-movie-card p {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  color: #ffffff;
+}
+
+.md-slider-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 20px;
+}
+
+.md-slider-buttons button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.md-slider-buttons button:hover {
+  background-color: #555;
+}
+
+.md-cast-section {
+  margin-top: -25px;
+}
+.md-cast-section h3 {
+  color: white;
+}
+
+.md-cast-members {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.md-cast-members::-webkit-scrollbar {
+  display: none;
+}
+
+.md-cast-member {
+  text-align: center;
+  width: 100px;
+  height: 150px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.md-cast-member img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+
+.md-cast-member span {
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+
+.md-trailer-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.md-trailer-modal-content {
+  width: 90%;
+  max-width: 800px;
+  background-color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.md-trailer-modal .md-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.md-trailer-modal .md-close-button:hover {
+  background-color: #ff2e2e;
+}
+
+@media screen and (max-width: 768px) {
+  .md-movie-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .md-left-section,
+  .md-right-section {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .md-related-movie-card {
+    width: 100px;
+  }
+
+  .md-cast-member {
+    width: 80px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .md-movie-title {
+    font-size: 1.5rem;
+  }
+
+  .md-buttons button {
+    font-size: 0.9rem;
+  }
+
+  .md-related-movie-card {
+    width: 80px;
+  }
+
+  .md-cast-member {
+    width: 70px;
+  }
+}
