@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "./movie.css";
 import { BASE_URL,API_KEY } from "@/lib/apiConfig";
 import Link from "next/link";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function Movie() {
   const [categories, setCategories] = useState([]);
@@ -11,8 +12,12 @@ export default function Movie() {
   const [movies, setMovies] = useState([]);
 
   const fetchGenres = async () => {
-    const response = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
-    const data = await response.json();
+    const response = await axiosInstance.get(`/genre/movie/list?api_key=${API_KEY}`,
+      {
+        baseURL: BASE_URL
+      }
+    );
+    const data = await response.data;
     setCategories(
       data.genres.filter((genre) =>
         ["Action", "Comedy", "Drama", "Horror", "Biography", "Adventure", "Crime"].includes(
@@ -23,8 +28,12 @@ export default function Movie() {
   };
 
   const fetchMoviesByGenre = async (genreId) => {
-    const response = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`);
-    const data = await response.json();
+    const response = await axiosInstance.get(`/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`,
+      {
+        baseURL: BASE_URL
+      }
+    );
+    const data = await response.data;
     setMovies(data.results);
   };
 

@@ -2,21 +2,28 @@
 import { useState, useEffect } from "react";
 import "./Trailers.css";
 import { BASE_URL,API_KEY } from "@/lib/apiConfig";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function Trailers() {
   const [trailers, setTrailers] = useState([]);
   const [selectedTrailer, setSelectedTrailer] = useState(null);
 
   const fetchTrailers = async () => {
-    const response = await fetch(
-      `${BASE_URL}/movie/popular?api_key=${API_KEY}`
+    const response = await axiosInstance.get(
+      `/movie/popular?api_key=${API_KEY}`,
+      {
+        baseURL: BASE_URL
+      }
     );
-    const movies = await response.json();
+    const movies = await response.data;
     const trailerPromises = movies.results.slice(0, 10).map(async (movie) => {
-      const res = await fetch(
-        `${BASE_URL}/movie/${movie.id}/videos?api_key=${API_KEY}`
+      const res = await axiosInstance.get(
+        `/movie/${movie.id}/videos?api_key=${API_KEY}`,
+        {
+          baseURL: BASE_URL
+        }
       );
-      const data = await res.json();
+      const data = await res.data;
       const trailer = data.results.find((video) => video.type === "Trailer");
       return trailer
         ? {

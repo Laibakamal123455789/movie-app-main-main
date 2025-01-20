@@ -1,6 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 import { useRouter } from "next/navigation";
 import { Provider, useDispatch } from "react-redux";
 import { addUser } from "@/store/slice/user";
@@ -30,7 +30,7 @@ function Signup() {
     try {
       console.log("User data being sent to the server:", user);
 
-      const response = await axios.post("/api/auth/signup", user);
+      const response = await axiosInstance.post("/auth/signup", user); // Use axiosInstance here
 
       console.log("Response from the server:", response.data);
 
@@ -38,11 +38,11 @@ function Signup() {
         localStorage.setItem("token", response.data.token);
 
         dispatch(addUser(response.data.user));
-        toast.success("registered successfully")
+        toast.success("Registered successfully");
         reset();
         router.push("login");
       } else {
-        toast.error("Email is already registered")
+        toast.error("Email is already registered");
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -86,8 +86,6 @@ function Signup() {
         />
         {errors.city && <p className="error-message">{errors.city.message}</p>}
 
-        {errors.maritalStatus && <p className="error-message">{errors.maritalStatus.message}</p>}
-
         <input
           {...register("email", {
             required: "Email is required.",
@@ -109,7 +107,7 @@ function Signup() {
         />
         {errors.password && <p className="error-message">{errors.password.message}</p>}
 
-        <button className="submit-button" >Register</button>
+        <button className="submit-button">Register</button>
         <p id="paragraph">
           Already have an account?{" "}
           <a

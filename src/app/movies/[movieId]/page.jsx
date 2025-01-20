@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import "./style.css";
+import axiosInstance from "@/utils/axiosInstance";
 
 const API_KEY = "62ba84da719c3812b6d078e3f7c2e4f1";
 
@@ -34,36 +35,40 @@ export default function MovieDetail({ params }) {
 
   const fetchMovieDetail = async () => {
     setIsLoading(true);
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
+    const response = await axiosInstance.get(
+      `/movie/${movieId}?api_key=${API_KEY}`, {
+        baseURL: 'https://api.themoviedb.org/3'
+      }
     );
-    const data = await response.json();
+    const data = await response.data;
     setMovie(data);
     setIsLoading(false);
   };
 
   const fetchMovieTrailer = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`
+    const response = await axiosInstance.get(
+      `/movie/${movieId}/videos?api_key=${API_KEY}`,{ 
+      baseURL: 'https://api.themoviedb.org/3'}
     );
-    const data = await response.json();
+    const data = await response.data;
     const trailer = data.results.find((video) => video.type === "Trailer");
     setTrailer(trailer);
   };
 
   const fetchMovieCast = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`
+    const response = await axiosInstance.get(
+      `/movie/${movieId}/credits?api_key=${API_KEY}`,
+      {baseURL: 'https://api.themoviedb.org/3'}
     );
-    const data = await response.json();
+    const data = await response.data;
     setCast(data.cast);
   };
 
   const fetchRelatedMovies = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${API_KEY}`
+    const response = await axiosInstance.get(
+      `/movie/${movieId}/similar?api_key=${API_KEY}`, {baseURL:"https://api.themoviedb.org/3"}
     );
-    const data = await response.json();
+    const data = await response.data;
     setRelatedMovies(data.results);
   };
 

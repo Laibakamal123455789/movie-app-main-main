@@ -1,4 +1,5 @@
 "use client";
+import axiosInstance from "@/utils/axiosInstance";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 
@@ -7,10 +8,13 @@ export default function CrimeMovies({ genre, apiKey }) {
   const [loading, setLoading] = useState(true);
 
   const fetchMovies = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genre.id}`
+    const response = await axiosInstance.get(
+      `/discover/movie?api_key=${apiKey}&with_genres=${genre.id}`,
+      {
+              baseURL: BASE_URL
+      }
     );
-    const data = await response.json();
+    const data = await response.data;
     setMovies(data.results);
     setLoading(false);
   };

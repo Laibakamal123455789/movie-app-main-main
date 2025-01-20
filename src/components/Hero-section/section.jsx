@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { Provider, useDispatch } from "react-redux";
 import { merastore } from "@/store/store";
 import { addToFavourites } from "@/store/slice/moviesFavourite";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function Page() {
   return (
@@ -30,10 +31,12 @@ function HeroSection() {
 
   const fetchMovies = async () => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/movie/popular?api_key=${API_KEY}`
+      const response = await axiosInstance.get(
+        `/movie/popular?api_key=${API_KEY}`, {
+          baseURL: BASE_URL
+        }
       );
-      const data = await response.json();
+      const data = await response.data;
       setMovies(data.results.slice(0, 20));
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -41,10 +44,12 @@ function HeroSection() {
   };
 
   const fetchTrailer = async (movieId) => {
-    const response = await fetch(
-      `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`
+    const response = await axiosInstance.get(
+      `/movie/${movieId}/videos?api_key=${API_KEY}`, {
+        baseURL: BASE_URL
+      }
     );
-    const data = await response.json();
+    const data = await response.data;
     const trailer = data.results.find((video) => video.type === "Trailer");
     return trailer ? `https://www.youtube.com/embed/${trailer.key}` : null;
   };

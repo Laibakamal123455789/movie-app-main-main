@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 import { useRouter } from "next/navigation";
 import "./resetPassword.css";
 
@@ -23,7 +23,7 @@ export default function ResetPassword() {
     setError("");
 
     try {
-      const resp = await axios.post("/api/auth/generate-otp", { action: "generate-otp", email });
+      const resp = await axiosInstance.post("/auth/generate-otp", { action: "generate-otp", email });
       if (resp.data.success) {
         setSuccess("OTP sent to your email.");
         setStep(2);
@@ -37,7 +37,7 @@ export default function ResetPassword() {
 
   const verifyOtp = async () => {
     const email = emailRef.current.value;
-    const otp = otpRef.current ? otpRef.current.value : ""; 
+    const otp = otpRef.current ? otpRef.current.value : "";
 
     if (!otp) {
       setError("Please enter the OTP.");
@@ -46,7 +46,7 @@ export default function ResetPassword() {
     setError("");
 
     try {
-      const resp = await axios.post("/api/auth/verify-otp", { action: "verify-otp", email, otp });
+      const resp = await axiosInstance.post("/auth/verify-otp", { action: "verify-otp", email, otp });
       if (resp.data.success) {
         setSuccess("OTP verified. You can now reset your password.");
         setStep(3);
@@ -74,7 +74,7 @@ export default function ResetPassword() {
     setError("");
 
     try {
-      const resp = await axios.post("/api/auth/reset-password", {
+      const resp = await axiosInstance.post("/auth/reset-password", {
         action: "reset-password",
         email,
         newPassword,

@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addUser } from "@/store/slice/user";

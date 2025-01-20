@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import {setFavourites, removeFromFavourites,} from "@/store/slice/moviesFavourite";
+import axiosInstance from "@/utils/axiosInstance";
+import { setFavourites, removeFromFavourites } from "@/store/slice/moviesFavourite";
 import { useRouter } from "next/navigation";
 import { merastore } from "@/store/store";
 import Image from "next/image";
@@ -28,16 +28,7 @@ function Wishlist() {
     if (isAuthenticated) {
       const fetchWishlist = async () => {
         try {
-          const token = localStorage.getItem("token");
-          if (!token) {
-            console.error("Token not found in localStorage");
-            return;
-          }
-
-          const response = await axios.get("/api/auth/wishlist", {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-
+          const response = await axiosInstance.get("/auth/wishlist"); // Use axiosInstance here
           dispatch(setFavourites(response.data.favouriteMovies || []));
         } catch (error) {
           console.error("Error fetching wishlist:", error);
@@ -56,20 +47,8 @@ function Wishlist() {
     }
 
     try {
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        console.error("Token not found in localStorage");
-        alert("No valid token found.");
-        return;
-      }
-
-      const response = await axios.delete("/api/auth/wishlist", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        data: { movieId },
+      const response = await axiosInstance.delete("/auth/wishlist", {
+        data: { movieId }, // Include the `movieId` in the request body
       });
 
       if (response.status === 200) {
