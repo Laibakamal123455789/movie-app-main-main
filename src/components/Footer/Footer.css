@@ -9,101 +9,160 @@ main {
 }
 
 footer {
-    background-color: #222;
-    color: #fff;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
+  background-color: #222;
+  color: #fff;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+footer .container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+footer .cta-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+footer .cta-section p {
+  margin-right: 5px;
+  font-size: 10px;
+}
+
+footer .cta-section .btn {
+  border-radius: 30px;
+  padding: 3px 6px; /* Minimal button padding */
+  font-size: 8px;
+  background-color: #f1c40f;
+  color: #222;
+  transition: background-color 0.3s ease;
+}
+
+footer .cta-section .btn:hover {
+  background-color: #e67e22;
+  color: white;
+}
+
+footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 3px; /* Reduced gap between icons */
+  margin-bottom: 5px;
+}
+
+footer .social-icons .btn {
+  padding: 4px;
+  font-size: 10px; /* Smaller icons */
+  background-color: transparent;
+  border: 2px solid #fff;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+footer .social-icons .btn:hover {
+  background-color: #fff;
+  color: #222;
+  transform: scale(1.05);
+}
+
+footer .social-icons i {
+  font-size: 12px;
+}
+
+/* Footer copyright section */
+footer .copyright {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 3px 0;
+  text-align: center;
+  font-size: 8px;
+}
+
+footer .copyright a {
+  color: #f1c40f;
+  text-decoration: none;
+}
+
+footer .copyright a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile and Tablet view adjustments */
+@media (max-width: 768px) {
+  footer {
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
-  
-  footer .container {
-    max-width: 16 00px;
-    margin: 0 auto;
-  }
-  
+
   footer .cta-section {
-    display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
   }
-  
+
   footer .cta-section p {
-    margin-right: 20px;
-    font-size: 18px;
+    margin-bottom: 2px;
+    font-size: 8px;
   }
-  
+
   footer .cta-section .btn {
-    border-radius: 30px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #f1c40f;
-    color: #222;
-    transition: background-color 0.3s ease;
+    padding: 2px 5px;
+    font-size: 6px;
   }
-  
-  footer .cta-section .btn:hover {
-    background-color: #e67e22;
-    color: white;
-  }
-  
+
   footer .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 5px;
   }
-  
+
   footer .social-icons .btn {
-   background-color: white;
-   color: black;
-    border-radius: 50%;
-    padding: 12px;
-    background-color: transparent;
-    border: 2px solid #fff;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    padding: 3px;
+    font-size: 8px;
   }
-  
-  footer .social-icons .btn:hover {
-    background-color: #fff;
-    color: #222;
-    transform: scale(1.1);
-  }
-  
-  footer .social-icons i {
-    font-size: 20px;
-  }
-  
-  /* Footer copyright section */
+
   footer .copyright {
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 20px 0;
-    text-align: center;
-    font-size: 14px;
+    font-size: 6px;
+    padding: 2px 0;
   }
-  
-  footer .copyright a {
-    color: #f1c40f;
-    text-decoration: none;
+}
+
+/* For devices with width 514px and below */
+@media (max-width: 514px) {
+  footer {
+    padding-top: 3px; /* Even more minimal padding */
+    padding-bottom: 3px; /* Even more minimal padding */
   }
-  
-  footer .copyright a:hover {
-    text-decoration: underline;
+
+  footer .cta-section {
+    margin-bottom: 3px; /* Reduced space between sections */
   }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
-    footer .cta-section {
-      flex-direction: column;
-    }
-  
-    footer .cta-section p {
-      margin-bottom: 10px;
-    }
-  
-    footer .social-icons {
-      flex-direction: column;
-      gap: 10px;
-    }
+
+  footer .cta-section p {
+    margin-bottom: 1px; /* Reduced space further */
+    font-size: 6px; /* Even smaller text */
   }
+
+  footer .cta-section .btn {
+    padding: 2px 4px; /* Even smaller button padding */
+    font-size: 5px; /* Minimized font size */
+  }
+
+  footer .social-icons {
+    gap: 1px; /* Minimal gap between icons */
+    margin-bottom: 3px; /* Reduced margin further */
+  }
+
+  footer .social-icons .btn {
+    padding: 2px;
+    font-size: 6px; /* Very small icon size */
+  }
+
+  footer .copyright {
+    font-size: 5px; /* Very small copyright text */
+    padding: 1px 0; /* Minimal padding */
+  }
+}

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import "./style.css";
 
 const API_KEY = "62ba84da719c3812b6d078e3f7c2e4f1";
-import "./style.css"
 
 export default function MovieDetail({ params }) {
   const [movieId, setMovieId] = useState(null);
