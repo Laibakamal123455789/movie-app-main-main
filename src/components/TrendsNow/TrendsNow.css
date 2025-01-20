@@ -3,7 +3,7 @@
   padding: 20px;
   color: #333;
   max-width: 100%;
-  overflow: hidden; /* Prevent scrollbar */
+  overflow: hidden; 
 }
 
 .trends-title {

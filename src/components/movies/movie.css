@@ -42,23 +42,23 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 250px;
-  height: 300px; /* Original height for desktop */
+  height: 300px; 
   margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensure content is spaced properly */
+  justify-content: space-between;
 }
 
 .movie-image {
   width: 80%;
-  height: 210px; /* Maintain original height of the image */
+  height: 210px; 
   margin: auto;
   border-radius: 10px;
 }
 
 .movie-details {
   margin-top: 10px;
-  flex-grow: 1; /* Allow movie details to grow and take remaining space */
+  flex-grow: 1; 
 }
 
 .movie-details h3 {
@@ -84,7 +84,6 @@
   color: white !important;
 }
 
-/* Desktop Design - Original */
 @media (min-width: 1025px) {
   .filter-buttons {
     flex-wrap: nowrap;
@@ -92,7 +91,7 @@
 
   .movie-card {
     max-width: 250px;
-    height: 300px; /* Keep original height for desktop */
+    height: 300px; 
   }
 
   .movie-details h3 {
@@ -103,8 +102,6 @@
     font-size: 1rem;
   }
 }
-
-/* Tablet and Mobile Responsive */
 @media (max-width: 1024px) {
   .filter-buttons {
     flex-direction: column;
@@ -113,11 +110,11 @@
 
   .movie-card {
     max-width: 220px;
-    height: 280px; /* Slightly reduced height for tablets */
+    height: 280px; 
   }
 
   .movie-image {
-    height: 180px; /* Adjusted image height */
+    height: 180px; 
   }
 
   .movie-details h3 {
@@ -142,11 +139,11 @@
 
   .movie-card {
     max-width: 200px;
-    height: 280px; /* Adjusted height for smaller tablets */
+    height: 280px; 
   }
 
   .movie-image {
-    height: 180px; /* Adjusted for better fit */
+    height: 180px; 
   }
 
   .movie-details h3 {
@@ -158,22 +155,21 @@
   }
 }
 
-/* Mobile (Less than 480px) */
 @media (max-width: 480px) {
   .filter-buttons {
     flex-direction: column;
-    gap: 3px; /* Reduced gap between filter buttons */
+    gap: 3px; 
   }
 
   .movie-card {
-    max-width: 170px; /* Further reduce card width */
-    height: 240px; /* Reduced height for mobile */
-    padding: 6px; /* Reduced padding */
-    margin: 0px; /* Further reduced margin between movie cards */
+    max-width: 170px;
+    height: 240px; 
+    padding: 6px; 
+    margin: 0px; 
   }
 
   .movie-image {
-    height: 150px; /* Adjusted image height for mobile screens */
+    height: 150px; 
   }
 
   .movie-details h3 {
@@ -192,6 +188,6 @@
   }
 
   .slick-slide {
-    margin: 0 0px; /* Further reduced gap between movie cards */
+    margin: 0 0px; 
   }
 }

@@ -7,47 +7,10 @@ import Link from "next/link";
 import axiosInstance from "@/utils/axiosInstance";
 
 export default function TrendsNow() {
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("Action");
-  const [movies, setMovies] = useState([]);
-
-  const fetchGenres = async () => {
-    const response = await axiosInstance.get(
-      `/genre/movie/list?api_key=${API_KEY}`,
-      {
-        baseURL: BASE_URL
-      }
-    );
-    const data = await response.data;
-    setCategories(
-      data.genres.filter((genre) =>
-        ["Action", "Comedy", "Drama", "Horror", "Biography", "Adventure", "Crime"].includes(
-          genre.name
-        )
-      )
-    );
-  };
-
-  const fetchMoviesByGenre = async (genreId) => {
-    const response = await axiosInstance. get(`/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`,
-      {
-        baseURL: BASE_URL
-      }
-    );
-    const data = await response.data;
-    setMovies(data.results);
-  };
-
-  useEffect(() => {
-    fetchGenres();
-  }, []);
-
-  useEffect(() => {
-    if (selectedCategory) {
-      const genre = categories.find((cat) => cat.name === selectedCategory);
-      if (genre) fetchMoviesByGenre(genre.id);
-    }
-  }, [selectedCategory, categories]);
+  const [todayMovies, setTodayMovies] = useState([]);
+  const [weekMovies, setWeekMovies] = useState([]);
+  const [selectedPeriod, setSelectedPeriod] = useState("day"); // State to track selected period
+  const [loading, setLoading] = useState(false);
 
   const sliderSettings = {
     dots: false,
@@ -80,28 +43,72 @@ export default function TrendsNow() {
     ],
   };
 
+  // Fetch movies for "Today"
+  const fetchTodayMovies = async () => {
+    setLoading(true);
+    const response = await axiosInstance.get(`/trending/movie/day?api_key=${API_KEY}`, {
+      baseURL: BASE_URL,
+    });
+    const data = await response.data;
+    setTodayMovies(data.results);
+    setLoading(false);
+  };
+
+  // Fetch movies for "This Week"
+  const fetchWeekMovies = async () => {
+    setLoading(true);
+    const response = await axiosInstance.get(`/trending/movie/week?api_key=${API_KEY}`, {
+      baseURL: BASE_URL,
+    });
+    const data = await response.data;
+    setWeekMovies(data.results);
+    setLoading(false);
+  };
+
+  // Fetch movies based on selected period
+  useEffect(() => {
+    if (selectedPeriod === "day") {
+      if (todayMovies.length === 0) fetchTodayMovies(); // Fetch today movies only if not already loaded
+    } else {
+      if (weekMovies.length === 0) fetchWeekMovies(); // Fetch week movies only if not already loaded
+    }
+  }, [selectedPeriod]);
+
+  // Select movies to display based on the selected period
+  const displayedMovies = selectedPeriod === "day" ? todayMovies : weekMovies;
+
   return (
     <div className="trends-container">
-      <h2 className="trends-title">Trends Now</h2>
+      <h2 className="trends-title">Trending Movies</h2>
       <hr className="trends-divider" />
+
+      {/* Buttons to toggle between "Today" and "This Week" */}
       <div className="trends-filters">
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            onClick={() => setSelectedCategory(category.name)}
-            className={`trends-filter-button ${
-              selectedCategory === category.name ? "trends-filter-active" : ""
-            }`}
-          >
-            {category.name}
-          </button>
-        ))}
+        <button
+          onClick={() => setSelectedPeriod("day")}
+          className={`trends-filter-button ${
+            selectedPeriod === "day" ? "trends-filter-active" : ""
+          }`}
+        >
+          Today
+        </button>
+        <button
+          onClick={() => setSelectedPeriod("week")}
+          className={`trends-filter-button ${
+            selectedPeriod === "week" ? "trends-filter-active" : ""
+          }`}
+        >
+          This Week
+        </button>
       </div>
-      {movies.length > 0 ? (
+
+      {loading ? (
+        <p className="trends-loading">Loading movies...</p>
+      ) : displayedMovies.length > 0 ? (
         <Slider {...sliderSettings} className="trends-slider">
-          {movies.map((movie) => (
+          {displayedMovies.map((movie) => (
             <div key={movie.id} className="trends-movie-card">
-              <Link key={movie.id} href={`/movies/${movie.id}`}>
+              <Link href={`/movies/${movie.id}`}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
@@ -119,7 +126,9 @@ export default function TrendsNow() {
           ))}
         </Slider>
       ) : (
-        <p className="trends-no-movies">Select a category to see movies!</p>
+        <p className="trends-no-movies">
+          {selectedPeriod === "day" ? "No movies for today." : "No movies for this week."}
+        </p>
       )}
     </div>
   );

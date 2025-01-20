@@ -36,9 +36,8 @@ export default function MovieDetail({ params }) {
   const fetchMovieDetail = async () => {
     setIsLoading(true);
     const response = await axiosInstance.get(
-      `/movie/${movieId}?api_key=${API_KEY}`, {
-        baseURL: 'https://api.themoviedb.org/3'
-      }
+      `/movie/${movieId}?api_key=${API_KEY}`,
+      { baseURL: "https://api.themoviedb.org/3" }
     );
     const data = await response.data;
     setMovie(data);
@@ -47,8 +46,8 @@ export default function MovieDetail({ params }) {
 
   const fetchMovieTrailer = async () => {
     const response = await axiosInstance.get(
-      `/movie/${movieId}/videos?api_key=${API_KEY}`,{ 
-      baseURL: 'https://api.themoviedb.org/3'}
+      `/movie/${movieId}/videos?api_key=${API_KEY}`,
+      { baseURL: "https://api.themoviedb.org/3" }
     );
     const data = await response.data;
     const trailer = data.results.find((video) => video.type === "Trailer");
@@ -58,7 +57,7 @@ export default function MovieDetail({ params }) {
   const fetchMovieCast = async () => {
     const response = await axiosInstance.get(
       `/movie/${movieId}/credits?api_key=${API_KEY}`,
-      {baseURL: 'https://api.themoviedb.org/3'}
+      { baseURL: "https://api.themoviedb.org/3" }
     );
     const data = await response.data;
     setCast(data.cast);
@@ -66,7 +65,8 @@ export default function MovieDetail({ params }) {
 
   const fetchRelatedMovies = async () => {
     const response = await axiosInstance.get(
-      `/movie/${movieId}/similar?api_key=${API_KEY}`, {baseURL:"https://api.themoviedb.org/3"}
+      `/movie/${movieId}/similar?api_key=${API_KEY}`,
+      { baseURL: "https://api.themoviedb.org/3" }
     );
     const data = await response.data;
     setRelatedMovies(data.results);
@@ -164,8 +164,15 @@ export default function MovieDetail({ params }) {
                       style={{ cursor: "pointer" }}
                     >
                       <img
-                        src={`https://image.tmdb.org/t/p/w200${relatedMovie.poster_path}`}
+                        src={
+                          relatedMovie.poster_path
+                            ? `https://image.tmdb.org/t/p/w200${relatedMovie.poster_path}`
+                            : "/images/dummy.jpg"
+                        }
                         alt={relatedMovie.title}
+                        onError={(e) =>
+                          (e.target.src = "/images/dummy.jpg")
+                        }
                       />
                       <p>{relatedMovie.title}</p>
                     </div>
@@ -187,8 +194,15 @@ export default function MovieDetail({ params }) {
               {cast.map((member) => (
                 <div key={member.id} className="md-cast-member">
                   <img
-                    src={`https://image.tmdb.org/t/p/w200${member.profile_path}`}
+                    src={
+                      member.profile_path
+                        ? `https://image.tmdb.org/t/p/w200${member.profile_path}`
+                        : "/images/dummy.jpg"
+                    }
                     alt={member.name}
+                    onError={(e) =>
+                      (e.target.src = "/images/dummy.jpg")
+                    }
                   />
                   <span>{member.name}</span>
                 </div>

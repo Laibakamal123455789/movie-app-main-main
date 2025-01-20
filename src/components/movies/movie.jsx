@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "./movie.css";
-import { BASE_URL,API_KEY } from "@/lib/apiConfig";
+import { BASE_URL, API_KEY } from "@/lib/apiConfig";
 import Link from "next/link";
 import axiosInstance from "@/utils/axiosInstance";
 
@@ -11,28 +11,16 @@ export default function Movie() {
   const [selectedCategory, setSelectedCategory] = useState("Action");
   const [movies, setMovies] = useState([]);
 
+  // Fetching genres for movie categories
   const fetchGenres = async () => {
-    const response = await axiosInstance.get(`/genre/movie/list?api_key=${API_KEY}`,
-      {
-        baseURL: BASE_URL
-      }
-    );
+    const response = await axiosInstance.get(`/genre/movie/list?api_key=${API_KEY}`, { baseURL: BASE_URL });
     const data = await response.data;
-    setCategories(
-      data.genres.filter((genre) =>
-        ["Action", "Comedy", "Drama", "Horror", "Biography", "Adventure", "Crime"].includes(
-          genre.name
-        )
-      )
-    );
+    setCategories(data.genres.filter((genre) => ["Action", "Comedy", "Drama", "Horror", "Biography", "Adventure", "Crime"].includes(genre.name)));
   };
 
+  // Fetch movies based on selected genre
   const fetchMoviesByGenre = async (genreId) => {
-    const response = await axiosInstance.get(`/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`,
-      {
-        baseURL: BASE_URL
-      }
-    );
+    const response = await axiosInstance.get(`/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`, { baseURL: BASE_URL });
     const data = await response.data;
     setMovies(data.results);
   };
@@ -82,37 +70,25 @@ export default function Movie() {
   return (
     <div className="movie-page" style={{ backgroundColor: "#f5f5f5" }}>
       <h2>Movies by Category</h2>
-      <hr
-        style={{
-          width: "350px",
-          justifyContent: "center",
-          margin: "auto",
-          marginBottom: "40px",
-        }}
-        ></hr>
+      <hr style={{ width: "350px", justifyContent: "center", margin: "auto", marginBottom: "40px" }} />
       <div className="filter-buttons">
         {categories.map((category) => (
           <button
-          key={category.id}
+            key={category.id}
             onClick={() => setSelectedCategory(category.name)}
             className={`filter-button ${selectedCategory === category.name ? "active" : ""}`}
-            >
+          >
             {category.name}
           </button>
         ))}
       </div>
       {movies.length > 0 ? (
         <Slider {...sliderSettings}>
-          {movies.map((movie, index) => (
-            
-            <div key={index} className="movie-card">
-              <Link key={movie.id} href={`/movies/${movie.id}`}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                className="movie-image"
-                />
-                 </Link>
+          {movies.map((movie) => (
+            <div key={movie.id} className="movie-card">
+              <Link href={`/movies/${movie.id}`}>
+                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="movie-image" />
+              </Link>
               <div className="movie-details">
                 <h3>{movie.title}</h3>
                 <div className="para">
@@ -120,15 +96,12 @@ export default function Movie() {
                   <p className="vote">{movie.release_date}</p>
                 </div>
               </div>
-             
             </div>
-          
           ))}
         </Slider>
       ) : (
         <p className="no-movies">Select a category to see movies!</p>
       )}
-      
     </div>
   );
 }

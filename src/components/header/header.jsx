@@ -23,7 +23,7 @@ function Header() {
   const router = useRouter();
   const users = useSelector((store) => store.user);
   const searchRef = useRef();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Toggle menu visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -42,7 +42,7 @@ function Header() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      {/* Left Section */}
+
       <div className="navbar-left">
         {users?.currentUser?.firstName ? (
           <Link href="/" id="link">
@@ -59,7 +59,6 @@ function Header() {
         )}
       </div>
 
-      {/* Center Section (Search) */}
       <div className="navbar-center">
         <input
           ref={searchRef}
@@ -81,16 +80,14 @@ function Header() {
         </button>
       </div>
 
-      {/* Toggle Button */}
       <button
         className="navbar-toggler"
         type="button"
-        onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle state
+        onClick={() => setIsMenuOpen(!isMenuOpen)} 
       >
         <span className="navbar-toggler-icon" />
       </button>
 
-      {/* Right Section */}
       <div className={`navbar-right ${isMenuOpen ? "open" : ""}`}>
         {users.isAuthenticated ? (
           <>
@@ -110,7 +107,7 @@ function Header() {
             <Link className="nav-link" href="/signup">
               SignUp
             </Link>
-            <Link className="nav-link" href="/login">
+            <Link className="nav-link" href="/login" id="login">
               Login
             </Link>
           </>

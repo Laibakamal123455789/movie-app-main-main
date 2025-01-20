@@ -59,6 +59,20 @@ body {
   font-size: 2rem;
   margin-bottom: 10px;
   color: #ff5757;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 100%; 
+}
+
+.md-related-movie-card p {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .md-movie-info {
@@ -205,6 +219,11 @@ body {
 .md-cast-member span {
   font-size: 0.8rem;
   color: #ffffff;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: block;
+  max-width: 100%; 
 }
 
 .md-trailer-modal {
