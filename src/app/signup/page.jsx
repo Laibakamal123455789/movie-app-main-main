@@ -30,7 +30,7 @@ function Signup() {
     try {
       console.log("User data being sent to the server:", user);
 
-      const response = await axiosInstance.post("/auth/signup", user); // Use axiosInstance here
+      const response = await axiosInstance.post("/auth/signup", user); 
 
       console.log("Response from the server:", response.data);
 

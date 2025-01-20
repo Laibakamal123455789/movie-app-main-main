@@ -23,7 +23,7 @@ function Header() {
   const router = useRouter();
   const users = useSelector((store) => store.user);
   const searchRef = useRef();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,29 +41,19 @@ function Header() {
   }, [dispatch]);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-
+    <nav className="navbar">
       <div className="navbar-left">
-        {users?.currentUser?.firstName ? (
-          <Link href="/" id="link">
-            <span id="name">Welcome, {users.currentUser.firstName}</span>
-          </Link>
-        ) : users?.currentUser?.email ? (
-          <span>
-            Welcome, {helpers.getNameFromEmail(users.currentUser.email)}
-          </span>
-        ) : (
-          <Link className="navbar-brand" href="/">
-            JustWatch
-          </Link>
-        )}
+        <Link className="navbar-brand" href="/">
+          {users?.currentUser?.firstName
+            ? `Welcome, ${users.currentUser.firstName}`
+            : "JustWatch"}
+        </Link>
       </div>
 
       <div className="navbar-center">
         <input
           ref={searchRef}
-          className="form-control"
-          type="search"
+          type="text"
           placeholder="Search"
           aria-label="Search"
         />
@@ -74,7 +64,6 @@ function Header() {
               router.push(`/search?q=${query}`);
             }
           }}
-          className="btn btn-outline-success"
         >
           Search
         </button>
@@ -82,24 +71,26 @@ function Header() {
 
       <button
         className="navbar-toggler"
-        type="button"
-        onClick={() => setIsMenuOpen(!isMenuOpen)} 
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        <span className="navbar-toggler-icon" />
+        <span className="navbar-toggler-icon"></span>
       </button>
 
       <div className={`navbar-right ${isMenuOpen ? "open" : ""}`}>
         {users.isAuthenticated ? (
           <>
-            <Link
-              className="nav-link"
-              onClick={() => dispatch(Logout())}
-              href="/login"
-            >
-              Logout
-            </Link>
             <Link className="nav-link" href="/favouritesMovie">
               WishList
+            </Link>
+            <Link
+              className="nav-link"
+              href="/login" // Ensure the href is always passed as a string
+              onClick={() => {
+                dispatch(Logout());
+                router.push("/login");
+              }}
+            >
+              Logout
             </Link>
           </>
         ) : (
@@ -107,7 +98,7 @@ function Header() {
             <Link className="nav-link" href="/signup">
               SignUp
             </Link>
-            <Link className="nav-link" href="/login" id="login">
+            <Link className="nav-link" href="/login">
               Login
             </Link>
           </>
