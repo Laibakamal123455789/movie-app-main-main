@@ -9,7 +9,7 @@ import axiosInstance from "@/utils/axiosInstance";
 export default function TrendsNow() {
   const [todayMovies, setTodayMovies] = useState([]);
   const [weekMovies, setWeekMovies] = useState([]);
-  const [selectedPeriod, setSelectedPeriod] = useState("day"); // State to track selected period
+  const [selectedPeriod, setSelectedPeriod] = useState("day"); 
   const [loading, setLoading] = useState(false);
 
   const sliderSettings = {
@@ -43,7 +43,6 @@ export default function TrendsNow() {
     ],
   };
 
-  // Fetch movies for "Today"
   const fetchTodayMovies = async () => {
     setLoading(true);
     const response = await axiosInstance.get(`/trending/movie/day?api_key=${API_KEY}`, {
@@ -54,7 +53,6 @@ export default function TrendsNow() {
     setLoading(false);
   };
 
-  // Fetch movies for "This Week"
   const fetchWeekMovies = async () => {
     setLoading(true);
     const response = await axiosInstance.get(`/trending/movie/week?api_key=${API_KEY}`, {
@@ -65,16 +63,15 @@ export default function TrendsNow() {
     setLoading(false);
   };
 
-  // Fetch movies based on selected period
+
   useEffect(() => {
     if (selectedPeriod === "day") {
-      if (todayMovies.length === 0) fetchTodayMovies(); // Fetch today movies only if not already loaded
+      if (todayMovies.length === 0) fetchTodayMovies(); 
     } else {
-      if (weekMovies.length === 0) fetchWeekMovies(); // Fetch week movies only if not already loaded
+      if (weekMovies.length === 0) fetchWeekMovies(); 
     }
   }, [selectedPeriod]);
 
-  // Select movies to display based on the selected period
   const displayedMovies = selectedPeriod === "day" ? todayMovies : weekMovies;
 
   return (
@@ -82,7 +79,6 @@ export default function TrendsNow() {
       <h2 className="trends-title">Trending Movies</h2>
       <hr className="trends-divider" />
 
-      {/* Buttons to toggle between "Today" and "This Week" */}
       <div className="trends-filters">
         <button
           onClick={() => setSelectedPeriod("day")}

@@ -6,8 +6,7 @@ export function dbConnect() {
     return;
   }
 
-  mongoose
-    .connect("mongodb://localhost:27017/userDetails", {
+  mongoose.connect("mongodb://localhost:27017/userDetails", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

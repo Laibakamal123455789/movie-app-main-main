@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Slider from "react-slick";
-import { jwtDecode } from "jwt-decode";
 import "./HeroSection.css";
 import { BASE_URL, API_KEY } from "@/lib/apiConfig";
 import axios from "axios";
@@ -92,17 +91,8 @@ function HeroSection() {
 
     if (token) {
       try {
-        const decodedToken = jwtDecode(token);
-        console.log("Decoded Token:", decodedToken);
 
-        const currentTime = Math.floor(Date.now() / 1000);
-        if (decodedToken.exp && decodedToken.exp < currentTime) {
-          alert("Session expired. Please log in again.");
-          console.log("Redirecting to login...");
-          router.push("/login");
-
-          return;
-        }
+       
      
         const response = await axios.post(
           "/api/auth/wishlist",

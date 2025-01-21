@@ -1,33 +1,31 @@
-"use client"
-import { addUser } from '@/store/slice/user';
-import { merastore } from '@/store/store';
-import React from 'react'
-import { Provider, useDispatch } from 'react-redux';
+import jwt from "jsonwebtoken";
+import { NextResponse } from "next/server";
 
-export default function Page(){
-    return <Provider store={merastore}>
-        <Info/>
-    </Provider>
-}
- function Info() {
-    let dispatch = useDispatch()
-     useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-          try {
-            const decoded = jwtDecode(token);
-            dispatch(
-              addUser({ email: decoded.email, firstName: decoded.firstName })
-            );
-          } catch (error) {
-            localStorage.removeItem("token");
-            alert(error.message);
-          }
-        }
-      }, [dispatch]);
-  return (
-    <div>
-      
-    </div>
-  )
+const SECRET_KEY = "your_secret_key";   
+
+export async function GET(req) {
+    const authHeader = req.headers.get("authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")){
+
+      return NextResponse.json(
+        { error: "Authorization header missing or malformed" },
+        { status: 401 }
+      );
+  }
+
+  const token = authHeader.split(" ")[1];
+
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    return NextResponse.json({
+      success: true,
+      user: {
+        email: decoded.email,
+        firstName: decoded.firstName,
+      },
+    });
+  } catch (error) {
+    return NextResponse.json({ error: "Invalid or expired token" }, { status: 401 });
+  }
 }

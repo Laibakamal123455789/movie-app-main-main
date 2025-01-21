@@ -11,14 +11,12 @@ export default function Movie() {
   const [selectedCategory, setSelectedCategory] = useState("Action");
   const [movies, setMovies] = useState([]);
 
-  // Fetching genres for movie categories
   const fetchGenres = async () => {
     const response = await axiosInstance.get(`/genre/movie/list?api_key=${API_KEY}`, { baseURL: BASE_URL });
     const data = await response.data;
     setCategories(data.genres.filter((genre) => ["Action", "Comedy", "Drama", "Horror", "Biography", "Adventure", "Crime"].includes(genre.name)));
   };
 
-  // Fetch movies based on selected genre
   const fetchMoviesByGenre = async (genreId) => {
     const response = await axiosInstance.get(`/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`, { baseURL: BASE_URL });
     const data = await response.data;

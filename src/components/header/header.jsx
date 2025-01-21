@@ -5,10 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { addUser, Logout } from "@/store/slice/user";
-import { jwtDecode } from "jwt-decode";
-import helpers from "@/helpers/helpers";
 import "./header.css";
 import { merastore } from "@/store/store";
+import axiosInstance from "@/utils/axiosInstance";
 
 export default function Page() {
   return (
@@ -26,18 +25,19 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        dispatch(
-          addUser({ email: decoded.email, firstName: decoded.firstName })
-        );
-      } catch (error) {
+
+    axiosInstance.get("/auth/info")
+      .then((response) => {
+        if (response.data.success) {
+          const user = response.data.user;
+          dispatch(addUser({ email: user.email, firstName: user.firstName }));
+        }
+      })
+      .catch((error) => {
+        console.error("Error verifying token:", error);
         localStorage.removeItem("token");
-        alert(error.message);
-      }
-    }
+        dispatch(Logout());
+      });
   }, [dispatch]);
 
   return (
@@ -84,7 +84,7 @@ function Header() {
             </Link>
             <Link
               className="nav-link"
-              href="/login" // Ensure the href is always passed as a string
+              href="/login"
               onClick={() => {
                 dispatch(Logout());
                 router.push("/login");

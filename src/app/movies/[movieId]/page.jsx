@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import "./style.css";
 import axiosInstance from "@/utils/axiosInstance";
+import { BASE_URL } from "@/lib/apiConfig";
 
 const API_KEY = "62ba84da719c3812b6d078e3f7c2e4f1";
 
@@ -37,7 +38,7 @@ export default function MovieDetail({ params }) {
     setIsLoading(true);
     const response = await axiosInstance.get(
       `/movie/${movieId}?api_key=${API_KEY}`,
-      { baseURL: "https://api.themoviedb.org/3" }
+      { baseURL: BASE_URL }
     );
     const data = await response.data;
     setMovie(data);
@@ -47,7 +48,7 @@ export default function MovieDetail({ params }) {
   const fetchMovieTrailer = async () => {
     const response = await axiosInstance.get(
       `/movie/${movieId}/videos?api_key=${API_KEY}`,
-      { baseURL: "https://api.themoviedb.org/3" }
+      { baseURL: BASE_URL }
     );
     const data = await response.data;
     const trailer = data.results.find((video) => video.type === "Trailer");
@@ -57,7 +58,7 @@ export default function MovieDetail({ params }) {
   const fetchMovieCast = async () => {
     const response = await axiosInstance.get(
       `/movie/${movieId}/credits?api_key=${API_KEY}`,
-      { baseURL: "https://api.themoviedb.org/3" }
+      { baseURL: BASE_URL }
     );
     const data = await response.data;
     setCast(data.cast);
@@ -66,7 +67,7 @@ export default function MovieDetail({ params }) {
   const fetchRelatedMovies = async () => {
     const response = await axiosInstance.get(
       `/movie/${movieId}/similar?api_key=${API_KEY}`,
-      { baseURL: "https://api.themoviedb.org/3" }
+      { baseURL: BASE_URL }
     );
     const data = await response.data;
     setRelatedMovies(data.results);

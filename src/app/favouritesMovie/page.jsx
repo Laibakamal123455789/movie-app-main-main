@@ -28,7 +28,7 @@ function Wishlist() {
     if (isAuthenticated) {
       const fetchWishlist = async () => {
         try {
-          const response = await axiosInstance.get("/auth/wishlist"); // Use axiosInstance here
+          const response = await axiosInstance.get("/auth/wishlist"); 
           dispatch(setFavourites(response.data.favouriteMovies || []));
         } catch (error) {
           console.error("Error fetching wishlist:", error);
