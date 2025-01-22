@@ -25,7 +25,8 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-
+    const token = localStorage.getItem("token")
+    if(!token){return}
     axiosInstance.get("/auth/info")
       .then((response) => {
         if (response.data.success) {

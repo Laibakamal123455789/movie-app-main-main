@@ -5,8 +5,6 @@ import Footer from "@/components/Footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,17 +24,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-      <Header/>
-      <main>
-       {children}
-      </main>
-      <ToastContainer></ToastContainer>
-      <Footer/>
+        <Header />
+        <main>{children}</main>
+        <ToastContainer></ToastContainer>
+        <Footer />
       </body>
-       
     </html>
   );
 }

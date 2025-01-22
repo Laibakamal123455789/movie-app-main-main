@@ -11,12 +11,12 @@ export let movieSlice = createSlice({
         movieId: action.payload.movieId || Math.random().toString(36).substring(7),
         title: action.payload.title || "Unknown Title",
         imageUrl: action.payload.imageUrl || "https://via.placeholder.com/150",
-        rating: action.payload.rating || "N/A", // Default value for rating
+        rating: action.payload.rating || "N/A", 
         originalId: movie.originalId,
-
-        addedBy: action.payload.addedBy || "Unknown", // Default value for addedBy
+        addedBy: action.payload.addedBy || "Unknown", 
       };
       state.favouriteMovies.push(movie);
+    
     },
     setFavourites: (state, action) => {
     state.favouriteMovies = action.payload.map((movie) => ({
@@ -27,14 +27,17 @@ export let movieSlice = createSlice({
       originalId: movie.originalId,
         addedBy: movie.addedBy || "Unknown", 
       }));
+
     },
     removeFromFavourites: (state, action) => {
       state.favouriteMovies = state.favouriteMovies.filter( (movie) =>{
         return movie.movieId !== action.payload
       }
-        
+      
       );
+  
     },
+   
   },
 });
 

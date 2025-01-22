@@ -27,7 +27,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 250px;
-  height: 350px; /* Increased height for better alignment */
+  height: 350px; 
   margin: auto;
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -42,8 +42,8 @@
   height: 240px;
   margin: auto;
   border-radius: 10px;
-  object-fit: cover; /* Ensures all images fit nicely */
-  background-color: #222; /* Fallback for missing images */
+  object-fit: cover; 
+  background-color: #222; 
 }
 
 .search-movie-details {
@@ -55,11 +55,11 @@
   font-weight: bold;
   margin-bottom: 5px;
   color: white;
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden; /* Hide overflow */
-  text-overflow: ellipsis; /* Add ellipsis for long titles */
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
   display: block;
-  max-width: 100%; /* Ensure it respects the parent width */
+  max-width: 100%; 
 }
 
 .search-movie-para {
@@ -71,7 +71,7 @@
 }
 
 .search-movie-vote {
-  color: #ffd700; /* Golden star color */
+  color: #ffd700;
   font-weight: bold;
 }
 
@@ -98,11 +98,11 @@
   background-color: #000;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 250px; /* Fixed width for all cards */
-  height: 350px; /* Fixed height for all cards */
+  width: 250px; 
+  height: 350px; 
   margin: auto;
   transition: transform 0.3s, box-shadow 0.3s;
-  flex: 0 0 auto; /* Prevent cards from growing or shrinking */
+  flex: 0 0 auto; 
 }
 
 .search-movie-card:hover {
@@ -111,11 +111,11 @@
 }
 
 .search-movie-image {
-  width: 100%; /* Ensure image width matches card width */
+  width: 100%; 
   height: 240px;
   margin: auto;
   border-radius: 10px;
-  object-fit: cover; /* Keeps images visually consistent */
-  background-color: #222; /* Fallback for missing images */
+  object-fit: cover; 
+  background-color: #222; 
 }
 

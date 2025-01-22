@@ -1,20 +1,19 @@
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
-const SECRET_KEY = "your_secret_key";   
+const SECRET_KEY = process.env.SECRET_KEY || "your_secret_key";
 
 export async function GET(req) {
-    const authHeader = req.headers.get("authorization");
-    if (!authHeader || !authHeader.startsWith("Bearer ")){
+  const authHeader = req.headers.get("authorization");
 
-      return NextResponse.json(
-        { error: "Authorization header missing or malformed" },
-        { status: 401 }
-      );
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return NextResponse.json(
+      { error: "Authorization header missing or malformed" },
+      { status: 401 }
+    );
   }
 
   const token = authHeader.split(" ")[1];
-
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
@@ -26,6 +25,10 @@ export async function GET(req) {
       },
     });
   } catch (error) {
-    return NextResponse.json({ error: "Invalid or expired token" }, { status: 401 });
+    console.error("JWT verification error:", error);
+    return NextResponse.json(
+      { error: error.name === "TokenExpiredError" ? "Token expired" : "Invalid token" },
+      { status: 401 }
+    );
   }
 }

@@ -36,7 +36,7 @@ footer .cta-section p {
 
 footer .cta-section .btn {
   border-radius: 30px;
-  padding: 3px 6px; /* Minimal button padding */
+  padding: 3px 6px; 
   font-size: 8px;
   background-color: #f1c40f;
   color: #222;
@@ -51,13 +51,13 @@ footer .cta-section .btn:hover {
 footer .social-icons {
   display: flex;
   justify-content: center;
-  gap: 3px; /* Reduced gap between icons */
+  gap: 3px; 
   margin-bottom: 5px;
 }
 
 footer .social-icons .btn {
   padding: 4px;
-  font-size: 10px; /* Smaller icons */
+  font-size: 10px;
   background-color: transparent;
   border: 2px solid #fff;
   transition: transform 0.3s ease, background-color 0.3s ease;
@@ -73,7 +73,7 @@ footer .social-icons i {
   font-size: 12px;
 }
 
-/* Footer copyright section */
+
 footer .copyright {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 3px 0;
@@ -130,39 +130,38 @@ footer .copyright a:hover {
   }
 }
 
-/* For devices with width 514px and below */
 @media (max-width: 514px) {
   footer {
-    padding-top: 3px; /* Even more minimal padding */
-    padding-bottom: 3px; /* Even more minimal padding */
+    padding-top: 3px;
+    padding-bottom: 3px; 
   }
 
   footer .cta-section {
-    margin-bottom: 3px; /* Reduced space between sections */
+    margin-bottom: 3px; 
   }
 
   footer .cta-section p {
-    margin-bottom: 1px; /* Reduced space further */
-    font-size: 6px; /* Even smaller text */
+    margin-bottom: 1px; 
+    font-size: 6px; 
   }
 
   footer .cta-section .btn {
-    padding: 2px 4px; /* Even smaller button padding */
-    font-size: 5px; /* Minimized font size */
+    padding: 2px 4px; 
+    font-size: 5px;
   }
 
   footer .social-icons {
-    gap: 1px; /* Minimal gap between icons */
-    margin-bottom: 3px; /* Reduced margin further */
+    gap: 1px; 
+    margin-bottom: 3px; 
   }
 
   footer .social-icons .btn {
     padding: 2px;
-    font-size: 6px; /* Very small icon size */
+    font-size: 6px;
   }
 
   footer .copyright {
-    font-size: 5px; /* Very small copyright text */
-    padding: 1px 0; /* Minimal padding */
+    font-size: 5px; 
+    padding: 1px 0; 
   }
 }

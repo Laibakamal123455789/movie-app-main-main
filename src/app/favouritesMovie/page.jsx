@@ -25,6 +25,10 @@ function Wishlist() {
   const router = useRouter();
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace("/login");
+      return;
+    }
     if (isAuthenticated) {
       const fetchWishlist = async () => {
         try {
@@ -48,7 +52,7 @@ function Wishlist() {
 
     try {
       const response = await axiosInstance.delete("/auth/wishlist", {
-        data: { movieId }, // Include the `movieId` in the request body
+        data: { movieId }, 
       });
 
       if (response.status === 200) {

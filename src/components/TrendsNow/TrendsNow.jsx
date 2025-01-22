@@ -5,12 +5,41 @@ import "./TrendsNow.css";
 import { BASE_URL, API_KEY } from "@/lib/apiConfig";
 import Link from "next/link";
 import axiosInstance from "@/utils/axiosInstance";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { setFavourites } from "@/store/slice/moviesFavourite";
+import { merastore } from "@/store/store";
 
-export default function TrendsNow() {
+export default function Page(){
+  return <Provider store={merastore}>
+    <TrendsNow/>
+  </Provider>
+}
+function TrendsNow() {
   const [todayMovies, setTodayMovies] = useState([]);
   const [weekMovies, setWeekMovies] = useState([]);
-  const [selectedPeriod, setSelectedPeriod] = useState("day"); 
+  const [selectedPeriod, setSelectedPeriod] = useState("day");
+  const [mappedMovies, setMapppedMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  // FETACH WISHLIST
+  const { favouriteMovies } = useSelector((state) => state.movieSlice);
+  const isAuthenticated = useSelector((store) => store.user.isAuthenticated);
+  const dispatch = useDispatch();
+  // const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const fetchWishlist = async () => {
+        try {
+          const response = await axiosInstance.get("/auth/wishlist");
+          dispatch(setFavourites(response.data.favouriteMovies || []));
+        } catch (error) {
+          console.error("Error fetching wishlist:", error);
+        }
+      };
+
+      fetchWishlist();
+    }
+  }, [isAuthenticated, dispatch]);
 
   const sliderSettings = {
     dots: false,
@@ -45,9 +74,12 @@ export default function TrendsNow() {
 
   const fetchTodayMovies = async () => {
     setLoading(true);
-    const response = await axiosInstance.get(`/trending/movie/day?api_key=${API_KEY}`, {
-      baseURL: BASE_URL,
-    });
+    const response = await axiosInstance.get(
+      `/trending/movie/day?api_key=${API_KEY}`,
+      {
+        baseURL: BASE_URL,
+      }
+    );
     const data = await response.data;
     setTodayMovies(data.results);
     setLoading(false);
@@ -55,24 +87,43 @@ export default function TrendsNow() {
 
   const fetchWeekMovies = async () => {
     setLoading(true);
-    const response = await axiosInstance.get(`/trending/movie/week?api_key=${API_KEY}`, {
-      baseURL: BASE_URL,
-    });
+    const response = await axiosInstance.get(
+      `/trending/movie/week?api_key=${API_KEY}`,
+      {
+        baseURL: BASE_URL,
+      }
+    );
     const data = await response.data;
     setWeekMovies(data.results);
     setLoading(false);
   };
 
-
   useEffect(() => {
     if (selectedPeriod === "day") {
-      if (todayMovies.length === 0) fetchTodayMovies(); 
+      if (todayMovies.length === 0) fetchTodayMovies();
     } else {
-      if (weekMovies.length === 0) fetchWeekMovies(); 
+      if (weekMovies.length === 0) fetchWeekMovies();
     }
   }, [selectedPeriod]);
 
   const displayedMovies = selectedPeriod === "day" ? todayMovies : weekMovies;
+  //UPDATE NEW ARRAY WHEN MOVIES AND FAVORITES ARE FETCHED
+  useEffect(() => {
+    if(!isAuthenticated) { 
+    console.log('LOGGED OUT')
+    setMapppedMovies([...displayedMovies]); 
+    return
+   }
+    const moviesWithFavoriteStatus =displayedMovies.map((movie) => ({
+      ...movie,
+      is_favorite: favouriteMovies.some(
+        (favMovie) => favMovie.originalId == movie.id
+      ),
+    }));
+
+    setMapppedMovies(moviesWithFavoriteStatus);
+  }, [favouriteMovies, displayedMovies]);
+
 
   return (
     <div className="trends-container">
@@ -100,10 +151,15 @@ export default function TrendsNow() {
 
       {loading ? (
         <p className="trends-loading">Loading movies...</p>
-      ) : displayedMovies.length > 0 ? (
+      ) : mappedMovies.length > 0 ? (
         <Slider {...sliderSettings} className="trends-slider">
-          {displayedMovies.map((movie) => (
+          {mappedMovies.map((movie) => (
             <div key={movie.id} className="trends-movie-card">
+              <i
+                className={`fa fa-heart heart-icon ${
+                  movie.is_favorite ? "filled" : ""
+                }`}
+              />
               <Link href={`/movies/${movie.id}`}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -123,7 +179,9 @@ export default function TrendsNow() {
         </Slider>
       ) : (
         <p className="trends-no-movies">
-          {selectedPeriod === "day" ? "No movies for today." : "No movies for this week."}
+          {selectedPeriod === "day"
+            ? "No movies for today."
+            : "No movies for this week."}
         </p>
       )}
     </div>

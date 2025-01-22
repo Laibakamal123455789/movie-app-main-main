@@ -1,4 +1,3 @@
-/* Main Navbar */
 .navbar {
   display: flex;
   align-items: center;
@@ -17,44 +16,42 @@
   background: black;
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
 }
-
-
 .navbar-left {
   display: flex;
   align-items: center;
   flex-grow: 1;
 }
-
+.navbar-left a{
+  margin-right: 60px !important;
+}
 .navbar-brand {
   font-size: 2rem;
   font-weight: bold;
   color: white !important;
   text-shadow: 10px 10px 15px rgba(231, 76, 60, 0.8); 
-  margin-right: 20px;
+  margin-right: 60px !important;
   text-decoration: none;
-  animation: fadeIn 1s ease-out;
+   animation: fadeIn 1s ease-out;
   transition: transform 0.3s ease, text-shadow 0.3s ease;
 }
 .navbar-brand:hover {
   transform: scale(1.2);
   text-shadow: 0 0 25px rgba(231, 76, 60, 1);
 }
-
-/* Center Section - Search Bar and Login/Signup */
 .navbar-center {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 5px; /* Reduced gap */
+  gap: 5px; 
   flex-grow: 1;
   margin-right: 40px;
 }
-
 .navbar-center input {
   width: 50%;
+  height: 40px;
   max-width: 300px;
   padding: 12px 15px;
-  margin-right: 5px; /* Reduced margin between input and button */
+  margin-right: 5px; 
   border-radius: 30px;
   border: 1px solid #ccc;
   font-size: 1rem;
@@ -63,16 +60,14 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
-
 .navbar-center input:focus {
   border-color: #f39c12;
   box-shadow: 0 0 20px rgba(243, 156, 18, 0.7);
   outline: none;
 }
-
 .navbar-center button {
   padding: 9px 20px;
-  margin-left: 5px; /* Reduced margin between input and button */
+  margin-left: 5px; 
   border-radius: 30px;
   background: rgb(173, 16, 16);
   color: white;
@@ -82,15 +77,12 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, background 0.3s ease;
 }
-
 .navbar-center button:hover {
   background: rgb(173, 16, 16);
- 
-  transform: scale(1.1);
+   transform: scale(1.1);
   box-shadow: 0 6px 20px rgba(22, 160, 133, 0.4);
 }
 
-/* Right Section - Login/Signup Links */
 .navbar-right {
   display: flex;
   align-items: center;
@@ -132,7 +124,6 @@
   left: 0;
 }
 
-/* Navbar Toggler for Mobile */
 .navbar-toggler {
   display: none;
   border: none;
@@ -152,7 +143,6 @@
   transform: rotate(45deg);
 }
 
-/* Responsive Styles */
 @media (max-width: 1024px) {
   .navbar-toggler {
     display: block;
@@ -192,7 +182,6 @@
   }
 }
 
-/* Animations */
 @keyframes slideIn {
   from {
     transform: translateY(-20px);
