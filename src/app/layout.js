@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header/header";
-import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Globals/header/header";
+import Footer from "@/components/Globals/Footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

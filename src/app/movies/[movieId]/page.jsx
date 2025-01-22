@@ -1,12 +1,9 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import "./style.css";
 import axiosInstance from "@/utils/axiosInstance";
 import { BASE_URL } from "@/lib/apiConfig";
-
 const API_KEY = "62ba84da719c3812b6d078e3f7c2e4f1";
-
 export default function MovieDetail({ params }) {
   const [movieId, setMovieId] = useState(null);
   const [movie, setMovie] = useState(null);
@@ -16,7 +13,6 @@ export default function MovieDetail({ params }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTrailerModalOpen, setIsTrailerModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     async function resolveParams() {
       const resolvedParams = await params;
@@ -24,7 +20,6 @@ export default function MovieDetail({ params }) {
     }
     resolveParams();
   }, [params]);
-
   useEffect(() => {
     if (movieId) {
       fetchMovieDetail();
@@ -33,7 +28,6 @@ export default function MovieDetail({ params }) {
       fetchRelatedMovies();
     }
   }, [movieId]);
-
   const fetchMovieDetail = async () => {
     setIsLoading(true);
     const response = await axiosInstance.get(
@@ -44,7 +38,6 @@ export default function MovieDetail({ params }) {
     setMovie(data);
     setIsLoading(false);
   };
-
   const fetchMovieTrailer = async () => {
     const response = await axiosInstance.get(
       `/movie/${movieId}/videos?api_key=${API_KEY}`,

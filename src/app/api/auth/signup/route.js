@@ -35,14 +35,12 @@ export async function POST(req) {
     });
 
     await newUser.save();
-
     const token = jwt.sign(
       {
         id: newUser._id,
       },
       JWT_SECRET
     );
-
     return NextResponse.json({ success: true, token, user: newUser });
   } catch (error) {
     console.error("Signup Error:", error);

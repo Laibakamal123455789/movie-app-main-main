@@ -156,6 +156,7 @@
   .filter-buttons {
     flex-direction: column;
     gap: 5px;
+
   }
 
   .movie-card {
@@ -180,6 +181,7 @@
   .filter-buttons {
     flex-direction: column;
     gap: 3px; 
+
   }
 
   .movie-card {

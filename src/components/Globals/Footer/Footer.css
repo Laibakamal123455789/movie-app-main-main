@@ -11,6 +11,7 @@ main {
 footer {
   background-color: #222;
   color: #fff;
+  height: 100vh;
   width: 100%;
   position: absolute;
   left: 0;
@@ -26,14 +27,13 @@ footer .cta-section {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px; /* Reduced margin */
+  margin-bottom: 10px; 
 }
 
 footer .cta-section p {
   margin-right: 5px;
   font-size: 10px;
 }
-
 footer .cta-section .btn {
   border-radius: 30px;
   padding: 3px 6px; 
@@ -133,7 +133,7 @@ footer .copyright a:hover {
 @media (max-width: 514px) {
   footer {
     padding-top: 3px;
-    padding-bottom: 3px; 
+    padding-bottom: 30px; 
   }
 
   footer .cta-section {

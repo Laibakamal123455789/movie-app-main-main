@@ -6,7 +6,6 @@ import { BASE_URL, API_KEY } from "@/lib/apiConfig";
 import Link from "next/link";
 import axiosInstance from "@/utils/axiosInstance";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
 import { merastore } from "@/store/store";
 import { setFavourites, removeFromFavourites, addToFavourites } from "@/store/slice/moviesFavourite";
 
