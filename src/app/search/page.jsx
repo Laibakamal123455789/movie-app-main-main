@@ -1,28 +1,31 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { BASE_URL, API_KEY } from "@/lib/apiConfig";
 import Link from "next/link";
 import "./search.css";
 import axiosInstance from "@/utils/axiosInstance";
 
-export default function Search() {
+function SearchResults() {
   const [movies, setMovies] = useState([]);
   const params = useSearchParams();
   const searchText = params.get("q")?.toLowerCase() || "";
-  const dummyImage = "/images/dummy.jpg"; 
+  const dummyImage = "/images/dummy.jpg";
 
   useEffect(() => {
     const fetchMovies = async () => {
       if (searchText) {
-        const response = await axiosInstance.get(
-          `/search/movie?api_key=${API_KEY}&query=${searchText}`,{
-             baseURL: BASE_URL
-          }
-        );
-        const data = await response.data;
-        setMovies(data.results || []);
+        try {
+          const response = await axiosInstance.get(
+            `/search/movie?api_key=${API_KEY}&query=${searchText}`,
+            { baseURL: BASE_URL }
+          );
+          const data = await response.data;
+          setMovies(data.results || []);
+        } catch (error) {
+          console.error("Error fetching movies:", error);
+        }
       }
     };
     fetchMovies();
@@ -60,5 +63,13 @@ export default function Search() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function Search() {
+  return (
+    <Suspense fallback={<div>Loading search results...</div>}>
+      <SearchResults />
+    </Suspense>
   );
 }

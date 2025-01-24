@@ -176,6 +176,51 @@
     font-size: 0.8rem;
   }
 }
+@media (max-width: 487px) {
+  .filter-buttons {
+    flex-direction: column;
+    gap: 3px; 
+    margin-bottom: 10px;
+  }
+
+  .movie-card {
+    max-width: 160px;
+    height: 220px; 
+    padding: 5px; 
+    margin: auto;
+  }
+
+  .movie-image {
+    height: 130px; 
+    border-radius: 8px;
+  }
+
+  .movie-details h3 {
+    font-size: 0.75rem;
+    margin-bottom: 2px;
+  }
+
+  .para {
+    font-size: 0.65rem;
+    flex-direction: column;
+    padding: 2px;
+  }
+
+  .no-movies {
+    font-size: 13px;
+  }
+
+  .slick-slide {
+    margin: 0 2px; 
+  }
+
+  .fa-heart {
+    font-size: 16px;
+    right: 5px;
+    top: 5px;
+  }
+}
+
 
 @media (max-width: 480px) {
   .filter-buttons {
@@ -214,3 +259,42 @@
     margin: 0 0px; 
   }
 }
+@media (max-width: 350px) {
+  .filter-buttons {
+    flex-direction: column;
+    gap: 2px; /* Reduce the gap between buttons */
+  }
+
+  .movie-card {
+    max-width: 150px;
+    height: 200px;
+    padding: 4px;
+    margin: 0 auto;
+    gap: 1rem;
+  }
+
+  .movie-image {
+    height: 130px;
+    width: 100%;
+    border-radius: 8px; /* Ensure consistent border radius */
+  }
+
+  .movie-details h3 {
+    font-size: 0.7rem;
+    margin-bottom: 2px;
+  }
+
+  .para {
+    font-size: 0.6rem;
+    padding: 1px;
+  }
+
+  .no-movies {
+    font-size: 12px;
+  }
+
+  .slick-slide {
+    margin: 0 2px; /* Reduce spacing between slides */
+  }
+}
+

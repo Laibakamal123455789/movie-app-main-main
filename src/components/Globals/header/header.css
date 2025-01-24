@@ -36,6 +36,7 @@
 }
 .navbar-brand:hover {
   transform: scale(1.2);
+
   text-shadow: 0 0 25px rgba(231, 76, 60, 1);
 }
 .navbar-center {

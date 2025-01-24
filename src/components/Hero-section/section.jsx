@@ -142,21 +142,22 @@ function HeroSection() {
         </div>
       )}
 
-      {isPlaying && trailerUrl && (
-        <div className="trailer-background">
-          <iframe
-            src={`${trailerUrl}?autoplay=1`}
-            title="Movie Trailer"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            className="trailer-video"
-          ></iframe>
-          <button className="close-trailer-button" onClick={closeTrailer}>
-            Close Trailer
-          </button>
-        </div>
-      )}
+{isPlaying && trailerUrl && (
+  <div className="trailer-background">
+    <iframe
+      src={`${trailerUrl}?autoplay=1`}
+      title="Movie Trailer"
+      frameBorder="0"
+      allow="autoplay; encrypted-media"
+      allowFullScreen
+      className="trailer-video"
+    ></iframe>
+    <button className="close-trailer-button" onClick={closeTrailer}>
+      Close Trailer
+    </button>
+  </div>
+)}
+
 
       <div className="hero-content">
         <div className="content-wrapper">

@@ -7,7 +7,6 @@ export default function Footer() {
     <footer className="text-center text-lg-start border border-white mt-xl-5 pt-4">
         <div className="container p-4">
          <div className="row">
-         
           <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
             <h5 className="text-uppercase mb-4">OUR WORLD</h5>
             <ul className="list-unstyled mb-4">
@@ -87,7 +86,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
       <div className="text-center p-3 border-top border-white">
         © 2020 Copyright:
         <a className="text-white" href="/">
@@ -97,6 +95,5 @@ export default function Footer() {
     </footer>
   </div>
 </>
-
   )
 }
