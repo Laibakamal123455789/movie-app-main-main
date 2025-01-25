@@ -19,12 +19,7 @@ export default function Page() {
 function Signup() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register,handleSubmit,reset,formState: { errors },} = useForm();
 
   const saveUser = async (user) => {
     try {

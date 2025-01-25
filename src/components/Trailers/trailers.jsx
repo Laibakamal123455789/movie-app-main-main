@@ -48,7 +48,7 @@ export default function Trailers() {
 
   return (
     <div className="main">
-      <h2>Trailers</h2>
+      <h2 className="title">Trailers</h2>
       <hr style={{width:"350px" , justifyContent: "center ", margin: "auto" , marginBottom :"40px"}}></hr>
 
     <div className="trailers-container">
