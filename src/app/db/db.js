@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
 
 export function dbConnect() {
+  console.log("Connecting to MongoDB...");
+
   if (mongoose.connection.readyState >= 1) {
     console.log("DB is already connected");
     return;
   }
 
-  mongoose.connect("mongodb+srv://eshaikram26:<db_password>@cluster0.jd9auqm.mongodb.net//userDetails", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+  mongoose.connect(process.env.MONGODB_URI)
     .then((connect) => {
       console.log("DB connected:", connect.connection.name);
     })
