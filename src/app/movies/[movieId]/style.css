@@ -317,7 +317,9 @@ body {
     height: 120px;
     padding: 10px;
   }
-
+  .md-related-movies-section h3{
+    width: 60%;
+ }
   .md-cast-member img {
     width: 60px;
     height: 60px;
@@ -342,7 +344,9 @@ body {
     flex-direction: column;
     align-items: center;
   }
-
+  .md-related-movies-section h3{
+    width: 60%;
+ }
   .md-left-section,
   .md-right-section {
     max-width: 100%;
@@ -366,7 +370,9 @@ body {
   .md-buttons button {
     font-size: 0.9rem;
   }
-
+  .md-related-movies-section h3{
+    width: 60%;
+ }
   .md-related-movie-card {
     width: 80px;
   }
@@ -440,7 +446,9 @@ body {
     height: 50px;
     margin-bottom: 3px;
   }
-
+  .md-related-movies-section h3{
+     width: 60%;
+  }
   .md-cast-member span {
     font-size: 0.7rem;
   }

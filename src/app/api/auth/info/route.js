@@ -12,7 +12,6 @@ export async function GET(req) {
       { status: 401 }
     );
   }
-
   const token = authHeader.split(" ")[1];
 
   try {

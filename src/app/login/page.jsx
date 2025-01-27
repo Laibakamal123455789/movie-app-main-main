@@ -15,7 +15,6 @@ export default function Page() {
     </Provider>
   );
 }
-
 function Login() {
   const dispatch = useDispatch();
   const router = useRouter();

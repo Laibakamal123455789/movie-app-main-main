@@ -31,7 +31,7 @@
 }
 
 .fa-heart.filled {
-  color: red; /* Filled heart color */
+  color: red; 
 }
 
 
@@ -107,10 +107,10 @@
 
 @media (max-width: 350px) {
   .movie-card{
-    margin-left: 30px
+    margin-left: 30px;
   }
   .filter-buttons {
     flex-direction: column;
-    gap: 2px; /* Reduce the gap between buttons */
+    gap: 2px; 
   }
 }

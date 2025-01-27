@@ -16,7 +16,6 @@ export default function Page() {
     </Provider>
   );
 }
-
 function Header() {
   const dispatch = useDispatch();
   const router = useRouter();

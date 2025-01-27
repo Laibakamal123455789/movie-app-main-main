@@ -1,4 +1,4 @@
-/* General styles for the trailers container */
+
 .trailers-container {
   display: flex;
   height: 100vh;
@@ -9,7 +9,7 @@
   background-color: #f5f5f5;
 }
 
-/* List styles */
+
 .trailers-list {
   display: flex;
   flex-direction: column;
@@ -44,7 +44,7 @@
 
 .trailer-thumbnail img {
   width: 100%;
-  height: auto; /* Maintain aspect ratio */
+  height: auto; 
   border-radius: 8px;
 }
 
@@ -53,7 +53,6 @@
   transform: scale(1.05);
 }
 
-/* Main trailer section */
 .main-trailer {
   flex: 1;
   display: flex;
@@ -62,13 +61,13 @@
   justify-content: center;
   position: relative;
   height: 100%;
-  max-height: 80vh; /* Limit the height */
+  max-height: 80vh; 
   padding: 10px;
-  background: rgba(0, 0, 0, 0.6); /* Add background for better visibility */
+  background: rgba(0, 0, 0, 0.6); 
   border-radius: 10px;
 }
 
-/* Iframe for trailer video */
+
 .main-trailer iframe {
   width: 100%;
   height: 100%;
@@ -77,7 +76,6 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Trailer title */
 .trailer-title {
   position: absolute;
   bottom: 20px;
@@ -89,16 +87,15 @@
   padding: 10px 15px;
   border-radius: 5px;
   max-width: 80%;
-  word-wrap: break-word; /* Prevent overflow */
+  word-wrap: break-word; 
 }
 
-/* Mobile Specific Styles */
 @media (max-width: 768px) {
   .trailers-container {
     height: 60vh;
   }
 
-  /* Main trailer area height */
+ 
   .main-trailer {
     max-height: 50vh;
   }
@@ -107,17 +104,15 @@
     height: 100%;
   }
 
-  /* Adjust thumbnail sizes */
   .trailer-thumbnail img {
     height: 150px;
-    object-fit: cover; /* Ensure images are cropped properly */
+    object-fit: cover; 
   }
 
   .trailer-title {
     font-size: 18px;
   }
 
-  /* Adjust the layout of the list */
   .trailers-list {
     width: 30%;
   }
@@ -129,7 +124,7 @@
   }
 
   .main-trailer {
-    max-height: 40vh;
+    max-height: 60vh;
   }
 
   .trailer-title {
@@ -141,7 +136,7 @@
   }
 
   .trailer-thumbnail img {
-    height: 130px;
+    height: 100px;
   }
 }
 .title{

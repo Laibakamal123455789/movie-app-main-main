@@ -80,18 +80,11 @@ export default function Footer() {
               </label>
               <input type="email" id="form5Example2" className="form-control" />
             </div>
-            <button type="submit" className="btn btn-outline-white btn-block">
-              Subscribe
-            </button>
+           
           </div>
         </div>
       </div>
-      <div className="text-center p-3 border-top border-white">
-        © 2020 Copyright:
-        <a className="text-white" href="/">
-          JustWatch.com
-        </a>
-      </div>
+      
     </footer>
   </div>
 </>

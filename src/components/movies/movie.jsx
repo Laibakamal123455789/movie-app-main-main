@@ -22,7 +22,7 @@ export default function Page() {
   const [selectedCategory, setSelectedCategory] = useState("Action");
   const [movies, setMovies] = useState([]);
   const [mappedMovies, setMapppedMovies] = useState([])
-  const [wishlist, setWishlist] = useState([]);
+  // const [wishlist, setWishlist] = useState([]);
   const { favouriteMovies } = useSelector((state) => state.movieSlice);
   const isAuthenticated = useSelector((store) => store.user.isAuthenticated);
   const dispatch = useDispatch();
