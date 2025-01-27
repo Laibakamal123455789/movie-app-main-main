@@ -6,7 +6,7 @@ export function dbConnect() {
     return;
   }
 
-  mongoose.connect("mongodb://localhost:27017/userDetails", {
+  mongoose.connect("mongodb+srv://eshaikram26:<db_password>@cluster0.jd9auqm.mongodb.net//userDetails", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
